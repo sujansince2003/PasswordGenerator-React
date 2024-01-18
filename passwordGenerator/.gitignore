@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-passwordgenerator
+passwordGenerator
 
 # Editor directories and files
 .vscode/*
