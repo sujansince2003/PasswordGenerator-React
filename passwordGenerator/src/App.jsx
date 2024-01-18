@@ -7,11 +7,10 @@ function App() {
   const [length, setLength] = useState(8);
   const [isnumallowed, setIsnumallowed] = useState(false);
   const [ischarallowed, setIscharallowed] = useState(false);
-
   const [Password, setPassword] = useState("");
-
   const passwordRef = useRef(null);
 
+  // Function for generating password
   const generatePassword = useCallback(() => {
     let pass = "";
     let string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -29,6 +28,7 @@ function App() {
     setPassword(pass);
   }, [length, ischarallowed, isnumallowed, setPassword]);
 
+  // Function for copying password to clipboard
   const copyPassword = useCallback(() => {
     passwordRef.current?.select();
     window.navigator.clipboard.writeText(Password);
@@ -45,6 +45,7 @@ function App() {
     });
   }, [Password]);
 
+  // useEffect hook for calling the functions based on dependancy array
   useEffect(() => {
     generatePassword();
   }, [length, ischarallowed, isnumallowed]);
@@ -112,6 +113,7 @@ function App() {
           Generate
         </button>
       </div>
+      {/* React toast container can be placed anywhere */}
       <ToastContainer />
     </>
   );
