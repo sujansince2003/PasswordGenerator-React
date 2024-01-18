@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import "./App.css";
 
 function App() {
@@ -24,7 +24,10 @@ function App() {
     }
     setPassword(pass);
   }, [length, ischarallowed, isnumallowed, setPassword]);
-  // generatePassword();
+
+  useEffect(() => {
+    generatePassword();
+  }, [length, ischarallowed, isnumallowed]);
   return (
     <>
       <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-slate-400 ">
@@ -59,6 +62,7 @@ function App() {
               <input
                 type="checkbox"
                 id="numallowed"
+                defaultChecked={isnumallowed}
                 onChange={() => setIsnumallowed((numallowed) => !numallowed)}
               />
               <label htmlFor="numallowed"> Includes Number</label>
@@ -67,6 +71,7 @@ function App() {
               <input
                 type="checkbox"
                 id="charallowed"
+                defaultChecked={ischarallowed}
                 onChange={() => setIscharallowed((charallowed) => !charallowed)}
               />
               <label htmlFor="charallowed"> Includes Special Characters</label>
