@@ -30,6 +30,7 @@ function App() {
   }, [length, ischarallowed, isnumallowed, setPassword]);
 
   const copyPassword = useCallback(() => {
+    passwordRef.current?.select();
     window.navigator.clipboard.writeText(Password);
     toast.success("Copied to Clipboard", {
       position: "top-right",
@@ -49,7 +50,7 @@ function App() {
   }, [length, ischarallowed, isnumallowed]);
   return (
     <>
-      <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-slate-400 ">
+      <div className="w-full md:w-[500px] mx-auto shadow-md rounded-lg px-12 py-3 my-8 bg-slate-400 ">
         <h1 className="text-white text-4xl text-center pb-5 ">
           Password Generator
         </h1>
