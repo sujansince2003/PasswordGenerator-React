@@ -1,4 +1,6 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
+import { toast, Bounce, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 function App() {
@@ -7,6 +9,8 @@ function App() {
   const [ischarallowed, setIscharallowed] = useState(false);
 
   const [Password, setPassword] = useState("");
+
+  const passwordRef = useRef(null);
 
   const generatePassword = useCallback(() => {
     let pass = "";
@@ -25,6 +29,21 @@ function App() {
     setPassword(pass);
   }, [length, ischarallowed, isnumallowed, setPassword]);
 
+  const copyPassword = useCallback(() => {
+    window.navigator.clipboard.writeText(Password);
+    toast.success("Copied to Clipboard", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+      theme: "light",
+      transition: Bounce,
+    });
+  }, [Password]);
+
   useEffect(() => {
     generatePassword();
   }, [length, ischarallowed, isnumallowed]);
@@ -41,9 +60,15 @@ function App() {
               type="text"
               value={Password}
               readOnly
+              ref={passwordRef}
             />
 
-            <button className="bg-blue-600  py-2 px-3 text-white">Copy</button>
+            <button
+              className="bg-blue-600  py-2 px-3 text-white"
+              onClick={() => copyPassword()}
+            >
+              Copy
+            </button>
           </div>
           <div className="flex flex-col gap-2 pl-12 py-10 items-start rounded-lg bg-white">
             <div className="flex flex-col items-center">
@@ -86,6 +111,7 @@ function App() {
           Generate
         </button>
       </div>
+      <ToastContainer />
     </>
   );
 }
