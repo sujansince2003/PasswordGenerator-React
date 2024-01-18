@@ -42,12 +42,35 @@ function App() {
 
             <button className="bg-blue-600  py-2 px-3 text-white">Copy</button>
           </div>
-          <div className="flex flex-col gap-4 pl-12 py-10 items-start rounded-lg bg-gray-500">
-            <input type="checkbox" />
-            <input type="checkbox" />
-            <input type="checkbox" />
-            <input type="checkbox" />
-            <input type="checkbox" />
+          <div className="flex flex-col gap-2 pl-12 py-10 items-start rounded-lg bg-white">
+            <div className="flex flex-col items-center">
+              <label>Length: {length}</label>
+              <input
+                type="range"
+                min={8}
+                max={20}
+                value={length}
+                onChange={(e) => {
+                  setLength((len) => e.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="numallowed"
+                onChange={() => setIsnumallowed((numallowed) => !numallowed)}
+              />
+              <label htmlFor="numallowed"> Includes Number</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="charallowed"
+                onChange={() => setIscharallowed((charallowed) => !charallowed)}
+              />
+              <label htmlFor="charallowed"> Includes Special Characters</label>
+            </div>
           </div>
         </div>
 
